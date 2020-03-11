@@ -1,0 +1,4 @@
+[26-Jul-2019 18:40:33 UTC] PHP Notice:  Undefined index: nombre in /home/s1stemas/public_html/educacion/contactform/contactform.php on line 5
+[26-Jul-2019 18:40:33 UTC] PHP Notice:  Undefined index: correo_origen in /home/s1stemas/public_html/educacion/contactform/contactform.php on line 9
+[26-Jul-2019 18:40:33 UTC] PHP Notice:  Undefined index: asunto in /home/s1stemas/public_html/educacion/contactform/contactform.php on line 11
+[26-Jul-2019 18:40:33 UTC] PHP Notice:  Undefined index: mensaje in /home/s1stemas/public_html/educacion/contactform/contactform.php on line 12

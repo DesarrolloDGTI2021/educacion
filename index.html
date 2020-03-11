@@ -1,0 +1,2114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Dirección de Educación</title>
+  <link rel="icon" href="images/logos/omc.ico">
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link href="css/animate.min.css" rel="stylesheet">
+  <link href="css/animate.css" rel="stylesheet" />
+  <link href="css/prettyPhoto.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+
+  <link href='fullcalendar/packages/core/main.css' rel='stylesheet' />
+  <link href='fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
+  <link href='fullcalendar/packages/timegrid/main.css' rel='stylesheet' />
+  <link href='fullcalendar/packages/list/main.css' rel='stylesheet' />
+  <script src='fullcalendar/packages/core/main.js'></script>
+  <script src='fullcalendar/packages/core/locales/es.js'></script>
+  <script src='fullcalendar/packages/interaction/main.js'></script>
+  <script src='fullcalendar/packages/daygrid/main.js'></script>
+  <script src='fullcalendar/packages/timegrid/main.js'></script>
+  <script src='fullcalendar/packages/list/main.js'></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+<style media="screen">
+.footer{
+  width: auto;
+  margin: 0 auto;
+  margin-top: 0 auto;
+    overflow:hidden;
+    background: url(images/pleca_piepagina.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .swal-button--confirm {
+    background-color: #2eb82e;
+  }
+  .swal-button {
+    background-color: #00cc00;
+  }
+  #boton_pleca{
+    margin:0;
+    width: auto;
+  }
+  .sweetalert{
+    text-align: center;
+  }
+  .swal{
+    text-align: center;
+  }
+  .modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+  /* .footer p{
+    color:#cf9359;} */
+</style>
+<!-- <script type="text/javascript">
+$('#calendar').fullCalendar({
+dayClick: function(date, jsEvent, view) {
+    alert('Clicked on: ' + date.format());
+    $('#titulomodal').text(date.format());
+    $('#modalEvento').modal('show');
+}
+});
+</script> -->
+
+    <script type="text/javascript" >
+
+    var fecha =new Date();
+    document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list'],
+      themeSystem: 'standard',
+      timeZone: 'local',
+      defaultView: 'dayGridMonth',
+      defaultDate: fecha,
+      locale: 'es',
+      // editable: true, // que se puedan cambiar de lugar
+      events: 'json/eventos.json',
+      eventLimit: true, // allow "more" link when too many events
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: ' dayGridMonth,timeGridWeek,timeGridDay,listMonth',
+      },
+      eventClick: function(info) {
+                $("#mititulo").html(info.event.title);
+                // $("#fechaevento").html(info.event.start);
+                $("#imagen").html(info.event.url);
+                $("#exampleModal").modal("show");
+                info.jsEvent.preventDefault();
+                },
+//                 eventRender: function(event, eventElement) {
+//     if (event.imageurl) {
+//         eventElement.find("div#imagen").prepend("<img src='" + event.imageurl +"'>");
+//     }
+// },
+
+
+    //   dateClick: function(info) {
+    //     // alert('Ejemplo de alerta que se despliega ' + info.dateStr);
+    //       $("#modalEvento").modal("show");
+    //   },
+    //   eventClick: function(info) {
+    //   info.jsEvent.preventDefault(); // don't let the browser navigate
+    //   if (info.event.url) {
+    //     // window.open(info.event.url);
+    //     $("#modalEvento").modal("show");
+    //   }
+    // },
+
+      // eventSources: [
+      //               {
+      //                   url: 'json/eventos.json',
+      //                   type: 'POST',
+      //                   // **allDayDefault:false,**
+      //                   // color: '#65a9d7', // color azul claro
+      //                   color: '#5a2d3f',   // an option! color guinda claro o vino
+      //                   textColor: '#ffffff'  // an option!
+      //
+      //               }
+      //           ]
+      // events:
+      // [
+      //
+      // {
+      //       "allDay": "true",
+      //       "title": " Acto Cívico Aniversario Fundación Salamanca, en Jardín Constitución.",
+      //       "id": "1",
+      //       "groupId": "",
+      //       "end": "2019-01-08 18:00:00",
+      //       "start": "2019-01-08 08:00:00",
+      //       "color": '#5a2d3f'
+      //
+      //   },
+      //   {
+      //       "allDay": "",
+      //       "title": " Izamiento y Arreamiento  Aniversario Nacimiento Ignacio Allende, 1769., en Plaza Cívica Miguel Hidalgo ",
+      //       "id": "",
+      //       "groupId": "2",
+      //       "end": "2019-01-21 18:00:00",
+      //       "start": "2019-01-21 08:00:00",
+      //       "color": '#5a2d3f'
+      //
+      //   },
+      //   {
+      //       "allDay": "",
+      //       "title": "Izamiento y Arreamiento Aniversario del nacimiento de Justo Sierra Méndez, en 1848., en Plaza Cívica Miguel Hidalgo",
+      //       "id": "",
+      //       "groupId": "3",
+      //       "end": "2019-01-26 18:00:00",
+      //       "start": "2019-01-26 08:00:00",
+      //       "color": '#5a2d3f'
+      //
+      //   },
+      // {
+      //       "allDay": "",
+      //       "title": "Izamiento y Arreamiento Apertura del segundo periódo de sesiones ordinarias del Congreso de la Unión., en Plaza Cívica Miguel Hidalgo",
+      //       "id": "",
+      //       "groupId": "4",
+      //       "end": "2019-02-01 18:00:00",
+      //       "start": "2019-02-01 08:00:00",
+      //       "color": '#5a2d3f'
+      //
+      //   },
+      //   {
+      //       "allDay": "",
+      //       "title": "Izamiento y Arreamiento Aniversario de la Promulgación de las Constituciones de 1857 y 1917., en Plaza Cívica Miguel Hidalgo",
+      //       "id": "",
+      //       "groupId": "5",
+      //       "end": "2019-02-05 18:00:00",
+      //       "start": "2019-02-05 08:00:00",
+      //       "color": '#5a2d3f'
+      //
+      //   },
+      // {
+      //       "allDay": "",
+      //       "title": "Acto Cívico Aniversario de la Promulgación de las Constituciones de 1857 y 1917., en Jardín Constitución",
+      //       "id": "",
+      //       "groupId": "5",
+      //       "end": "2019-02-05 18:00:00",
+      //       "start": "2019-02-05 08:15:00",
+      //       color: '#5a2d3f'
+      //
+      //   },
+      // {
+      //       "allDay": "",
+      //       "title": "Izamiento y Arreamiento Aniversario de la muerte de Vicente Guerrero en 1831.",
+      //       "id": "6",
+      //       "groupId": "",
+      //       "end": "2019-02-14 18:00:00",
+      //       "start": "2019-02-14 08:00:00",
+      //       "color": '#5a2d3f'
+      //
+      //   },
+      //   {
+      //       "allDay": "",
+      //       "title": "Izamiento y Arreamiento Día del Ejercito Mexicano., en Plaza Cívica Miguel Hidalgo",
+      //       "id": "7",
+      //       "groupId": "",
+      //       "end": "2019-02-19 18:00:00",
+      //       "start": "2019-02-19 08:00:00",
+      //       "color": '#5a2d3f'
+      //
+      //   },
+      // {
+      //       "allDay": "",
+      //       "title": "Izamiento y Arreamiento Aniversario de la muerte de Francisco I. Madero, en 1913., en Plaza Cívica Miguel Hidalgo",
+      //       "id": "8",
+      //       "groupId": "",
+      //       "end": "2019-02-22 18:00:00",
+      //       "start": "2019-02-22 08:00:00",
+      //       "color": '#5a2d3f'
+      //
+      //   },
+      //   {
+      //       "allDay": "",
+      //       "title": "Izamiento y Arreamiento Día de la Bandera., en Plaza Cívica Miguel Hidalgo",
+      //       "id": "",
+      //       "groupId": "9",
+      //       "end": "2019-02-24 18:00:00",
+      //       "start": "2019-02-24 08:00:00",
+      //       "color": '#5a2d3f'
+      //
+      //   },
+      // {
+      //       "allDay": "",
+      //       "title": "Acto Cívico Día de la Bandera.,en Jardín Constitución",
+      //       "id": "",
+      //       "groupId": "9",
+      //       "end": "2019-02-24 18:00:00",
+      //       "start": "2019-02-24 08:15:00",
+      //       "color": '#5a2d3f'
+      //
+      //   },
+      // {
+      //       "allDay": "",
+      //       "title": "Izamiento y Arreamiento Aniversario de la muerte de Cuauhtémoc en 1525., en Plaza Cívica Miguel Hidalgo",
+      //       "id": "10",
+      //       "groupId": "",
+      //       "end": "2019-02-28 16:00:00",
+      //       "start": "2019-02-28 08:00:00",
+      //       "color": '#5a2d3f'
+      //
+      //   },
+      //   {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la Proclamación del plan de Ayutla., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "11",
+      //         "groupId": "",
+      //         "end": "2019-03-01 18:00:00",
+      //         "start": "2019-03-01 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la Expropiación Petrolera, en 1938., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "12",
+      //         "groupId": "",
+      //         "end": "2019-03-18 18:00:00",
+      //         "start": "2019-03-18 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario del nacimiento de Benito Juárez, en 1806., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "",
+      //         "groupId": "13",
+      //         "end": "2019-03-21 18:00:00",
+      //         "start": "2019-03-21 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Acto Cívico Aniversario del nacimiento de Benito Juárez, en 1806., en Obelisco a Benito Juárez (Faja de Oro esq. Zaragoza)",
+      //         "id": "",
+      //         "groupId": "13",
+      //         "end": "2019-03-21 18:00:00",
+      //         "start": "2019-03-21 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "true",
+      //         "title": "Inicio de la Primavera",
+      //         "id": "14",
+      //         "groupId": "",
+      //         "end": "2019-03-24 18:00:00",
+      //         "start": "2019-03-24 08:30:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Día de la Promulgación del Plan de Guadalupe., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "15",
+      //         "groupId": "",
+      //         "end": "2019-03-26 18:00:00",
+      //         "start": "2019-03-26 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la Toma de Puebla en 1867., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "16",
+      //         "groupId": "",
+      //         "end": "2019-04-02 18:00:00",
+      //         "start": "2019-04-02 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la muerte de Emiliano Zapata en 1919., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "17",
+      //         "groupId": "",
+      //         "end": "2019-04-10 18:00:00",
+      //         "start": "2019-04-10 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la gesta Heroica de la defensa del puerto de Veracruz., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "18",
+      //         "groupId": "",
+      //         "end": "2019-04-21 18:00:00",
+      //         "start": "2019-04-21 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Día del Trabajo, en Plaza Cívica Miguel Hidalgo",
+      //         "id": "19",
+      //         "groupId": "",
+      //         "end": "2019-05-01 18:00:00",
+      //         "start": "2019-05-01 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay":"",
+      //         "title": "Izamiento y Arreamiento Conmemoración de la muerte de los pilotos de la Fuerza Aérea Expedicionaria Mexicana, Escuadrón 201 en 1945., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "20",
+      //         "groupId": "",
+      //         "end": "2019-05-02 18:00:00",
+      //         "start": "2019-05-02 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la Victoria sobre el Ejército Francés en Puebla en 1862., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "21",
+      //         "groupId": "21",
+      //         "end": "2019-05-05 18:00:00",
+      //         "start": "2019-05-05 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario del Nacimiento en 1753, de Miguel Hidalgo y Costilla, iniciador de la independencia de México., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "22",
+      //         "groupId": "",
+      //         "end": "2019-05-08 18:00:00",
+      //         "start": "2019-05-08 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la Toma de Querétaro, por la fuerzas de la Republica, en 1867., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "23",
+      //         "groupId": "",
+      //         "end": "2019-05-15 16:00:00",
+      //         "start": "2019-05-15 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la muerte de Venustiano Carranza en 1920., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "24",
+      //         "groupId": "",
+      //         "end": "2019-05-21 18:00:00",
+      //         "start": "2019-05-21 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Día de la Marina Nacional, en Plaza Cívica Miguel Hidalgo",
+      //         "id": "25",
+      //         "groupId": "",
+      //         "end": "2019-06-01 18:00:00",
+      //         "start": "2019-06-01 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la muerte de Albino García Ramos (El Manco), en 1812., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "26",
+      //         "groupId": "",
+      //         "end": "2019-06-08 18:00:00",
+      //         "start": "2019-06-08 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la Victoria de las armas nacionales sobre el Imperio, en 1867., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "27",
+      //         "groupId": "",
+      //         "end": "2019-06-21 16:00:00",
+      //         "start": "2019-06-21 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la muerte de Andrés Delgado (El Giro) 1819., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "28",
+      //         "groupId": "",
+      //         "end": "2019-07-03 18:00:00",
+      //         "start": "2019-07-03 08:00:00",
+      //         "color": '#5a2d3f'
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la muerte del General Álvaro Obregón en 1928., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "29",
+      //         "groupId": "",
+      //         "end": "2019-07-17 16:00:00",
+      //         "start": "2019-07-17 08:00:00",
+      //         "color": '#5a2d3f',
+      //         "imageUrl": 'images/nubes.jpg'
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la muerte de Benito Juárez en 1872., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "",
+      //         "groupId": "30",
+      //         "end": "2019-07-18 18:00:00",
+      //         "start": "2019-07-18 08:00:00",
+      //          "color": '#5a2d3f',
+      //          "imageUrl": 'images/arte.jpg'
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Acto Cívico Aniversario de la muerte de Benito Juárez en 1872., en Obelisco a Benito Juárez (Faja de Oro esq. Zaragoza)",
+      //         "id": "",
+      //         "groupId": "30",
+      //         "end": "2019-07-18 18:00:00",
+      //         "start": "2019-07-18 08:15:00",
+      //          "color": '#5a2d3f'
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la muerte de Miguel Hidalgo y Costilla en 1811., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "31",
+      // 	       "groupId": "",
+      //         "end": "2019-07-30 18:00:00",
+      //         "start": "2019-07-30 08:00:00",
+      //         "color": '#5a2d3f'
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la muerte de María Tomasa Esteves y Salas, en 1814., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "32",
+      // 	       "groupId": "",
+      //         "end": "2019-08-09 18:00:00",
+      //         "start": "2019-08-09 08:00:00",
+      //         "color": '#5a2d3f'
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la firma de Tratados de Teoloyucan, en 1914., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "33",
+      // 	       "groupId": "",
+      //         "end": "2019-08-13 18:00:00",
+      //         "start": "2019-08-13 08:00:00",
+      //         "color": '#5a2d3f'
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la instalación de la Suprema Junta Nacional Americana de Zitácuaro, en 1811., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "34",
+      // 	       "groupId": "",
+      //         "end": "2019-08-19 18:00:00",
+      //         "start": "2019-08-19 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Apertura del primer periodo de sesiones ordinarias del Congreso de la Unión., en Plaza Cívica Miguel Hidalgo",
+      // 	       "groupId": "35",
+      //         "end": "2019-09-01 18:00:00",
+      //         "start": "2019-09-01 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Acto Cívico Apertura del primer periodo de sesiones ordinarias del Congreso de la Unión., en Plaza Cívica Miguel Hidalgo",
+      // 	       "groupId": "35",
+      //         "end": "2019-09-01 18:00:00",
+      //         "start": "2019-09-01 08:15:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Develación del Bando Público., en Plaza Cívica Miguel Hidalgo",
+      // 	       "groupId": "35",
+      //         "end": "2019-09-01 18:00:00",
+      //         "start": "2019-09-01 08:15:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la Victoria sobre el Ejército Español en Tampico, en 1829., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "36",
+      // 	       "groupId": "",
+      //         "end": "2019-09-11 16:00:00",
+      //         "start": "2019-09-11 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Conmemoración de la Gesta Heroica del Batallón de San Patricio, en 1847., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "37",
+      // 	       "groupId": "",
+      //         "end": "2019-09-12 18:00:00",
+      //         "start": "2019-09-12 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario del Sacrificio de los Niños Héroes de Chapultepec, en 1847., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "38",
+      // 	       "groupId": "",
+      //         "end": "2019-09-13 18:00:00",
+      //         "start": "2019-09-13 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Acto Cívico Aniversario del Sacrificio de los Niños Héroes de Chapultepec, en 1847., en Plaza de los Niños Héroes",
+      //         "id": "38",
+      // 	       "groupId": "",
+      //         "end": "2019-09-13 18:00:00",
+      //         "start": "2019-09-13 08:15:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Incorporación del Estado de Chiapas al Pacto Federal., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "39",
+      // 	       "groupId": "",
+      //         "end": "2019-09-14 18:00:00",
+      //         "start": "2019-09-14 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Conmemoración del Grito de Independencia., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "40",
+      // 	       "groupId": "",
+      //         "end": "2019-09-15 18:00:00",
+      //         "start": "2019-09-15 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario del Inicio de la Independencia de México, en 1810., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "41",
+      // 	       "groupId": "",
+      //         "end": "2019-09-16 18:00:00",
+      //         "start": "2019-09-16 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "true",
+      //         "title": "Desfile Aniversario del Inicio de la Independencia de México, en 1810., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "42",
+      // 	       "groupId": "",
+      //         "end": "2019-09-17 18:00:00",
+      //         "start": "2019-09-17 08:30:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Día Nacional de Protección Civil y conmemoración del Sismo de 1985., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "43",
+      // 	       "groupId": "",
+      //         "end": "2019-09-19 18:00:00",
+      //         "start": "2019-09-19 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "true",
+      //         "title": "Acto Cívico Llegada del Fuego Simbólico por la Cabalgata de la Ruta de la Independencia Nacional., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "44",
+      // 	       "groupId": "",
+      //         "end": "2019-09-21 18:00:00",
+      //         "start": "2019-09-21 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "true",
+      //         "title": "Acto Cívico Despedida del Fuego Simbólico por la Cabalgata de la Ruta de la Independencia Nacional., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "45",
+      // 	       "groupId": "",
+      //         "end": "2019-09-21 18:00:00",
+      //         "start": "2019-09-21 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la Consumación de la Independencia en 1821., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "",
+      // 	       "groupId": "46",
+      //         "end": "2019-09-27 18:00:00",
+      //         "start": "2019-09-27 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Acto Cívico Aniversario de la Consumación de la Independencia en 1821., en Rotonda del Bicentenario, en Plaza Cívica Miguel Hidalgo",
+      //         "id": "",
+      // 	       "groupId": "46",
+      //         "end": "2019-09-27 18:00:00",
+      //         "start": "2019-09-27 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario del Nacimiento de José María Morelos, en 1765., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "47",
+      // 	       "groupId": "",
+      //         "end": "2019-09-30 18:00:00",
+      //         "start": "2019-09-30 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de los caídos en la lucha por la democracia de la Plaza de las Tres Culturas en Tlatelolco, en 1968., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "48",
+      // 	       "groupId": "",
+      //         "end": "2019-10-02 16:00:00",
+      //         "start": "2019-10-02 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Conmemoración del sacrificio del senador Belisario Domínguez, en 1913., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "49",
+      // 	       "groupId": "",
+      //         "end": "2019-10-07 16:00:00",
+      //         "start": "2019-10-07 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Día de la Raza y Aniversario del Descubrimiento de América en 1492., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "50",
+      // 	       "groupId": "",
+      //         "end": "2019-10-12 18:00:00",
+      //         "start": "2019-10-12 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la Constitución del Ejército Insurgente Libertador, en 1810., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "51",
+      // 	       "groupId": "",
+      //         "end": "2019-10-22 16:00:00",
+      //         "start": "2019-10-22 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Día Nacional de la Aviación., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "52",
+      // 	       "groupId": "",
+      //         "end": "2019-10-23 16:00:00",
+      //         "start": "2019-10-23 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Día de las Naciones Unidas., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "53",
+      // 	       "groupId": "",
+      //         "end": "2019-10-24 18:00:00",
+      //         "start": "2019-10-24 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario del nacimiento de Francisco I. Madero, en 1873., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "54",
+      // 	       "groupId": "",
+      //         "end": "2019-10-30 18:00:00",
+      //         "start": "2019-10-30 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Conmemoración de la Promulgación del Acta de la Independencia Nacional por el Congreso de Chilpancingo en 1813., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "55",
+      // 	       "groupId": "",
+      //         "end": "2019-11-06 18:00:00",
+      //         "start": "2019-11-06 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "true",
+      //         "title": "Desfile Aniversario del Inicio de la Revolución Mexicana, en 1910., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "56",
+      // 	       "groupId": "",
+      //         "end": "2019-11-19 18:00:00",
+      //         "start": "2019-11-19 08:30:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario del Inicio de la Revolución Mexicana, en 1910., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "57",
+      // 	       "groupId": "",
+      //         "end": "2019-11-20 18:00:00",
+      //         "start": "2019-11-20 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Día de la Armada de México., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "58",
+      // 	       "groupId": "",
+      //         "end": "2019-11-23 16:00:00",
+      //         "start": "2019-11-23 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      //     {
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario de la muerte de José María Morelos, en 1815., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "59",
+      // 	       "groupId": "",
+      //         "end": "2019-12-02 18:00:00",
+      //         "start": "2019-12-02 08:00:00",
+      //         "color": '#5a2d3f'
+      //
+      //     },
+      // {
+      //
+      //         "allDay": "",
+      //         "title": "Izamiento y Arreamiento Aniversario del nacimiento de Venustiano Carranza, en 1859., en Plaza Cívica Miguel Hidalgo",
+      //         "id": "60",
+      // 	       "groupId": "",
+      //         "end": "2019-12-29 18:00:00",
+      //         "start": "2019-12-29 08:00:00",
+      //         "color": '#5a2d3f',
+      //         "imageUrl": $("<img src = 'images/arte.jpg' style='width:24px;height:24px'/>")
+      //
+      //
+      //     }
+      // ]
+
+
+    });
+
+    calendar.render();
+  }
+);
+
+</script>
+<!-- <script type="text/javascript">
+$('#calendar').fullCalendar({
+  events: source,
+  header: {
+      left: '',
+      center: 'prev title next',
+      right: ''
+  },
+  eventClick:  function(event, jsEvent, view) {
+      //set the values and open the modal
+      $("#eventInfo").html(event.description);
+      $("#eventLink").attr('href', event.url);
+      $("#eventContent").dialog({ modal: true, title: event.title });
+  }
+});
+
+</script> -->
+<script >
+  function cargarindex(){
+     location.href="../index.html";
+  }
+  </script>
+  <!--  -->
+  <!-- =======================================================
+    Theme Name: OnePage
+    Theme URL: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/
+    Author: BootstrapMade
+    Author URL: https://bootstrapmade.com
+  ======================================================= -->
+</head>
+
+
+<body>
+  <!--  -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 class="modal-title" id="exampleModalLabel"
+                  style="text-align:center; font-weight:bold; color:#303e48;">.: EVENTOS DE DIRECCIÓN DE EDUCACIÓN :.</h3>
+
+                </div>
+                <div class="modal-body">
+                  <h6 class="modal-title" id="fechaevento" style="font-style:italic;"></h6><br>
+                  <div id="mititulo" style="text-align:center; font-weight:bold;"></div><br>
+                  <div id="imagen"></div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal"
+                  style="background-color:#fcb600; border:none; color:white;"> Cerrar </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--  modal convenios-->
+          <div class="modal fade fullscreen-modal" id="conveniomodal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h3 class="modal-title" id="exampleModalLabel"
+                          style="text-align:center; font-weight:bold; color:#303e48;">CONVENIO CON CETESA</h3>
+
+                        </div>
+                        <div class="modal-body">
+                          <h6 class="modal-title" id="fechaevento" style="font-style:italic;"></h6>
+                          <div id="mititulo" style="text-align:center; font-weight:bold;"></div>
+                          <div id="imagen"> <img class="img-responsive" src="Plantillas Educación/CETESA.jpg" alt=""> </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal"
+                          style="background-color:#fcb600; border:none; color:white;"> Cerrar </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--  modal convenios-->
+                  <div class="modal fade fullscreen-modal" id="conveniomodal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h3 class="modal-title" id="exampleModalLabel"
+                                  style="text-align:center; font-weight:bold; color:#303e48;">CONVENIO CON INAEBA</h3>
+
+                                </div>
+                                <div class="modal-body">
+                                  <h6 class="modal-title" id="fechaevento" style="font-style:italic;"></h6>
+                                  <div id="mititulo" style="text-align:center; font-weight:bold;"></div>
+                                  <div id="imagen"> <img class="img-responsive" src="Plantillas Educación/INAEBA.jpg" alt=""> </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal"
+                                  style="background-color:#fcb600; border:none; color:white;"> Cerrar </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--  modal convenios-->
+                          <div class="modal fade fullscreen-modal" id="conveniomodal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                          <h3 class="modal-title" id="exampleModalLabel"
+                                          style="text-align:center; font-weight:bold; color:#303e48;">CONVENIO CON SIP</h3>
+
+                                        </div>
+                                        <div class="modal-body">
+                                          <h6 class="modal-title" id="fechaevento" style="font-style:italic;"></h6>
+                                          <div id="mititulo" style="text-align:center; font-weight:bold;"></div>
+                                          <div id="imagen"> <img class="img-responsive" src="Plantillas Educación/SIP.jpg" alt=""> </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-default" data-dismiss="modal"
+                                          style="background-color:#fcb600; border:none; color:white;"> Cerrar </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!--  modal convenios-->
+                                  <div class="modal fade fullscreen-modal" id="conveniomodal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                  <h3 class="modal-title" id="exampleModalLabel"
+                                                  style="text-align:center; font-weight:bold; color:#303e48;">CONVENIO CON UDL</h3>
+
+                                                </div>
+                                                <div class="modal-body">
+                                                  <h6 class="modal-title" id="fechaevento" style="font-style:italic;"></h6>
+                                                  <div id="mititulo" style="text-align:center; font-weight:bold;"></div>
+                                                  <div id="imagen"> <img class="img-responsive" src="Plantillas Educación/UDL.jpg" alt=""> </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-default" data-dismiss="modal"
+                                                  style="background-color:#fcb600; border:none; color:white;"> Cerrar </button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+          <!--  modal convenios-->
+          <div class="modal fade fullscreen-modal" id="conveniomodal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h3 class="modal-title" id="exampleModalLabel"
+                          style="text-align:center; font-weight:bold; color:#303e48;">CONVENIO CON DE LA SALLE BAJÍO</h3>
+
+                        </div>
+                        <div class="modal-body">
+                          <h6 class="modal-title" id="fechaevento" style="font-style:italic;"></h6>
+                          <div id="mititulo" style="text-align:center; font-weight:bold;"></div>
+                          <div id="imagen"> <img class="img-responsive" src="Plantillas Educación/De la Salle.jpg" alt=""> </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal"
+                          style="background-color:#fcb600; border:none; color:white;"> Cerrar </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--  modal convenios-->
+                  <div class="modal fade fullscreen-modal" id="conveniomodal6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h3 class="modal-title" id="exampleModalLabel"
+                                  style="text-align:center; font-weight:bold; color:#303e48;">CONVENIO CON UNIVER</h3>
+
+                                </div>
+                                <div class="modal-body">
+                                  <h6 class="modal-title" id="fechaevento" style="font-style:italic;"></h6>
+                                  <div id="mititulo" style="text-align:center; font-weight:bold;"></div>
+                                  <div id="imagen"> <img class="img-responsive" src="Plantillas Educación/UNIVER.jpg" alt=""> </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal"
+                                  style="background-color:#fcb600; border:none; color:white;"> Cerrar </button>
+                                </div>
+                              </div>
+                            </div>
+              </div>
+              <!--  modal convenios-->
+              <div class="modal fade fullscreen-modal" id="conveniomodal7" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h3 class="modal-title" id="exampleModalLabel"
+                              style="text-align:center; font-weight:bold; color:#303e48;">CONVENIO CON UTS</h3>
+
+                            </div>
+                            <div class="modal-body">
+                              <h6 class="modal-title" id="fechaevento" style="font-style:italic;"></h6>
+                              <div id="mititulo" style="text-align:center; font-weight:bold;"></div>
+                              <div id="imagen"> <img class="img-responsive" src="Plantillas Educación/UTS.jpg" alt=""> </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal"
+                              style="background-color:#fcb600; border:none; color:white;"> Cerrar </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!--  modal convenios-->
+                      <div class="modal fade fullscreen-modal" id="conveniomodal8" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <h3 class="modal-title" id="exampleModalLabel"
+                                      style="text-align:center; font-weight:bold; color:#303e48;">CONVENIO CON UVEG</h3>
+
+                                    </div>
+                                    <div class="modal-body">
+                                      <h6 class="modal-title" id="fechaevento" style="font-style:italic;"></h6>
+                                      <div id="mititulo" style="text-align:center; font-weight:bold;"></div>
+                                      <div id="imagen"> <img class="img-responsive" src="Plantillas Educación/UVEG.jpg" alt=""> </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal"
+                                      style="background-color:#fcb600; border:none; color:white;"> Cerrar </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!--  modal convenios-->
+                              <div class="modal fade fullscreen-modal" id="conveniomodal9" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                              <h3 class="modal-title" id="exampleModalLabel"
+                                              style="text-align:center; font-weight:bold; color:#303e48;">CONVENIO CON VOCACIONAL 18 DE MARZO</h3>
+
+                                            </div>
+                                            <div class="modal-body">
+                                              <h6 class="modal-title" id="fechaevento" style="font-style:italic;"></h6>
+                                              <div id="mititulo" style="text-align:center; font-weight:bold;"></div>
+                                              <div id="imagen"> <img class="img-responsive" src="Plantillas Educación/18 de Marzo.jpg" alt=""> </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-default" data-dismiss="modal"
+                                              style="background-color:#fcb600; border:none; color:white;"> Cerrar </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+          <!-- modal agenda del mes -->
+          <div class="modal fade" id="agenda" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h3 class="modal-title" id="exampleModalLabel"
+                          style="text-align:center; font-weight:bold; color:#303e48;">.: AGENDA DE EVENTOS GENERALES DEL MES :.</h3>
+
+                        </div>
+                        <div class="modal-body">
+                          <h6 class="modal-title" id="fechaevento" style="font-style:italic;"></h6><br>
+                          <div id="mititulo" style="text-align:center; font-weight:bold;"></div><br>
+                          <div id="imagen">
+                            <img src="images/agenda/AGENDA DICIEMBRE.jpg" alt="" class="img-responsive">
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal"
+                          style="background-color:#fcb600; border:none; color:white;"> Cerrar </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--  -->
+                  <!-- modal agenda del mes -->
+                  <div class="modal fade"  id="imagenservicio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h3 class="modal-title" id="exampleModalLabel"
+                                  style="text-align:center; font-weight:bold; color:#303e48;">SERVICIO DE BECAS FIRMES</h3>
+
+                                </div>
+                                <div class="modal-body">
+                                  <h6 class="modal-title" id="fechaevento" style="font-style:italic;"></h6><br>
+                                  <div id="mititulo" style="text-align:center; font-weight:bold;"></div>
+                                  <div id="imagen">
+                                    <img src="Plantillas Educación/Becas Firmes.jpg" alt="" class="img-responsive" >
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-default" data-dismiss="modal"
+                                  style="background-color:#fcb600; border:none; color:white;"> Cerrar </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+  <!--  -->
+  <!-- modal agenda del mes -->
+  <div class="modal fade" id="imagenservicio1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h3 class="modal-title" id="exampleModalLabel"
+                  style="text-align:center; font-weight:bold; color:#303e48;">SERVICIO DE ABANDERAMIENTO A ESCUELAS</h3>
+
+                </div>
+                <div class="modal-body">
+                  <h6 class="modal-title" id="fechaevento" style="font-style:italic;"></h6><br>
+                  <div id="mititulo" style="text-align:center; font-weight:bold;"></div>
+                  <div id="imagen">
+                    <img src="Plantillas Educación/Abanderamiento.jpg" alt="" class="img-responsive">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal"
+                  style="background-color:#fcb600; border:none; color:white;"> Cerrar </button>
+                </div>
+              </div>
+            </div>
+          </div>
+<!--  -->
+  <nav class="navbar navbar-default navbar-fixed-top " style="background-color:white;">
+       <a href="../index.html" onclick="cargarindex()"><img src="images/pleca1.jpg" alt="" class="img-responsive"
+         style="height:auto; width:auto; border-radius:none; margin-left:0;" ></a>
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- <a class="navbar-brand" href="#">Software Solutions</a> -->
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="menu" style="margin:1%;">
+          <ul class="nav navbar-nav">
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#home"  style=" font-weight:bold; font-size:17px; color:black;">INICIO</a></li>
+            <li><a href="#about"  style="font-weight:bold; font-size:17px; color:black;">BIENVENIDA</a></li>
+            <li><a href="#portfolio" style="font-weight:bold; font-size:17px; color:black;">GALERÍA </a></li>
+            <li><a href="#features" style=" font-weight:bold; font-size:17px; color:black;">SERVICIOS</a></li>
+            <li><a href="#normativa" style="font-weight:bold; font-size:17px; color:black;">NORMATIVA</a></li>
+            <li><a href="#convenios" style=" font-weight:bold; font-size:17px; color:black;">CONVENIOS</a></li>
+            <li><a href="#culturacivica" style=" font-weight:bold; font-size:17px; color:black;">CULTURA CÍVICA</a></li>
+             <li><a href="#contact" style=" font-weight:bold; font-size:17px; color:black;">CONTACTO</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+  </nav>
+<br><br>
+  <div id="home" style="padding-top:9.38%;">
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+          <div class="item active">
+            <img src="images/slide.jpg" alt="Image">
+            <div class="carousel-caption">
+              <h3></h3>
+              <p></p>
+            </div>
+          </div>
+
+          <div class="item">
+            <img src="images/slider/Educación.jpg" alt="Image">
+            <div class="carousel-caption">
+              <h3></h3>
+              <p></p>
+            </div>
+          </div>
+
+
+
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+    </div>
+  </div>
+<br><br>
+  <section id="about" style="padding-top:300px;">
+    <div class="container">
+      <div class="center">
+        <div class="col-md-6 col-md-offset-3">
+
+          <h2>Dirección de Educación </h2>
+          <h2>Salamanca, Gto </h2>
+          <hr>
+          <p class="lead" style="text-align:justify;"><br>
+            Bienvenido. Salamanca es hogar de gente buena, de trabajo, de esfuerzo. Por ello la Dirección de
+            Educación proporciona servicios de calidad; donde promueve y fortalece la educación
+            cívica y cultural del municipio. Mediante una gestión transparente, participativa e
+            innovadora atendiendo nivel básico, medio superior y superior contribuyendo al desarrollo
+            integral de nuestros Salmantinos.
+          </p>
+        </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 wow fadeInRight">
+          <img src="images/item22.jpg" class="img-responsive" />
+          <p></p>
+
+        </div>
+        <!--/.col-sm-6-->
+
+        <div class="col-sm-6 wow fadeInDown">
+          <div class="accordion">
+            <div class="panel-group" id="accordion1">
+
+              <div class="panel panel-default">
+                <div class="panel-heading active">
+                  <h3 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1">
+                      Dirección
+                      <i class="fa fa-angle-right pull-right"></i>
+                    </a>
+                  </h3>
+                </div>
+
+                <div id="collapseOne1" class="panel-collapse collapse in">
+                  <div class="panel-body">
+                    <div class="media accordion-inner">
+                      <div class="pull-left">
+                        <img class="img-responsive" src="">
+                      </div>
+                      <div class="media-body">
+                        <h4></h4>
+                        <p>DIRECTOR: Lic. Camilo Tolentino Hernández</p>
+                        <p>TELÉFONO: (464) 64 7 33 71</p>
+                        <p>CORREO: educacion@salamanca.gob.mx</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+<!--
+
+<div class="panel panel-default">
+  <div class="panel-heading active">
+    <h3 class="panel-title">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1">
+        Misión
+        <i class="fa fa-angle-right pull-right"></i>
+      </a>
+    </h3>
+  </div>
+
+  <div id="collapseOne1" class="panel-collapse collapse in">
+    <div class="panel-body">
+      <div class="media accordion-inner">
+        <div class="pull-left">
+          <img class="img-responsive" src="">
+        </div>
+        <div class="media-body">
+          <h4></h4>
+          <p>Promover y desarrollar programas educativos, cívicos y culturales que ayuden a contribuir el desarrollo de los Salmantinos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo1">
+                      Visión
+                      <i class="fa fa-angle-right pull-right"></i>
+                    </a>
+                  </h3>
+                </div>
+                <div id="collapseTwo1" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <p>La Dirección de Educación del municipio de Salamanca, es la responsable de desarrollar estrategias educativas, cuyo objetivo es promover y comprometerse
+                      con una educación de calidad sustentada en el respeto y la equidad, donde se pueda generar en los niños y niñas salmantinos un cambio de mirada de nuestra
+                      sociedad permitiendo la formación de seres humanos.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseThree1">
+                      Valores
+                      <i class="fa fa-angle-right pull-right"></i>
+                    </a>
+                  </h3>
+                </div>
+                <div id="collapseThree1" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <p>Responsabilidad, Honestidad, Respeto, Compromiso, Actitud de Servicio.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseFour1">
+                      Organigrama
+                      <i class="fa fa-angle-right pull-right"></i>
+                    </a>
+                  </h3>
+                </div>
+                <div id="collapseFour1" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <p>DIRECTOR GENERAL DE EDUCACIÓN: Lic. Camilo Tolentino Hernández</p>
+                    <p>Elena Camarena Camarena </p>
+                    <p>José Alfredo Campos Mendoza</p>
+                    <p>Edna Laura Rodríguez Rodríguez</p>
+                    <p>Norma Leticia Arellano Ortega</p>
+                    <p>Emida Abarca Reyes</p> -->
+                    <!-- <p>Anim pariatur cliche reprehenderit.<br> Lorem dolor brunch.</p> -->
+                    <!-- <p> <img class="img-responsive" src="images/organigrama2.png" alt="">
+                    </p> -->
+                    <!-- <div class="recent-work-wrap">
+                      <img class="img-responsive" src="images/portfolio/recent/organigrama3.png" alt="">
+                      <div class="overlay">
+                        <div class="recent-work-inner">
+                            <h3><a href="">Organigrama Dirección de Educación</a></h3>
+                          <a class="preview" href="images/portfolio/full/organigrama3.png" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                            Ver</a>
+                        </div>
+                      </div>
+                    </div> -->
+                  <!-- </div>
+                </div>
+              </div>
+            </div> -->
+            <!--/#accordion1-->
+          <!-- </div> -->
+        <!-- </div> -->
+
+      <!-- </div> -->
+      <!--/.row-->
+    <!-- </div> -->
+    <!--/.container-->
+  </section>
+
+  <!--/#about-->
+  <br>
+  <br>
+  <br>
+  <section id="portfolio" style="padding-top:300px;">
+    <div class="container col-md-12">
+      <div class="center">
+        <div class="col-md-6 col-md-offset-3">
+          <h2>Galería</h2>
+          <hr>
+          <p class="lead">Galería de imágenes de Dirección de Educación</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" >
+      <div class="col-lg-12 col-md-12">
+        <ul class="portfolio-filter text-center">
+          <li><a class="btn btn-default active" href="#" data-filter="*">TODO</a></li>
+          <li><a class="btn btn-default" href="#" data-filter=".actocivico">ACTOS CÍVICOS</a></li>
+          <li><a class="btn btn-default" href="#" data-filter=".eventos">EVENTOS</a></li>
+          <li><a class="btn btn-default" href="#" data-filter=".visitas">VISITAS</a></li>
+        </ul>
+        <!--/#portfolio-filter-->
+
+        <div class="row">
+          <div class="portfolio-items" >
+            <div class="portfolio-item actocivico col-xs-12 col-sm-3 col-md-3">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/actos civicos/actocivico1.jpg" alt="">
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>Dirección de Educación</h3>
+                    <p></p>
+                    <a class="preview" href="images/portfolio/full/actos civicos/actocivico1.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+
+            <div class="portfolio-item eventos col-xs-12 col-sm-3 col-md-3" style="margin:0; padding:0;">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/aniversarios/aniversario1.jpg" alt="">
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>Dirección de Educación</h3>
+                    <p></p>
+                    <a class="preview" href="images/portfolio/full/aniversarios/aniversario1.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+
+            <div class="portfolio-item visitas col-xs-12 col-sm-3 col-md-3" style="margin:0; padding:0;">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/visitas/visita1.jpg" alt="">
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>Dirección de Educación</h3>
+                    <p></p>
+                    <a class="preview" href="images/portfolio/full/visitas/visita1.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+
+            <div class="portfolio-item actocivico apps col-xs-12 col-sm-3 col-md-3" style="margin:0; padding:0;">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/actos civicos/actocivico2.jpg" alt="">
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>Dirección de Educación</h3>
+                    <p></p>
+                    <a class="preview" href="images/portfolio/full/actos civicos/actocivico2.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+
+            <div class="portfolio-item eventos col-xs-12 col-sm-3 col-md-3" style="margin:0; padding:0;">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/eventos/evento1.jpg" alt="">
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>Dirección de Educación</h3>
+                    <p></p>
+                    <a class="preview" href="images/portfolio/full/eventos/evento1.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+
+            <div class="portfolio-item visitas apps col-xs-12 col-sm-3 col-md-3" style="margin:0; padding:0;">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/visitas/visita2.jpg" alt="">
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>Dirección de Educación</h3>
+                    <a class="preview" href="images/portfolio/full/visitas/visita2.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+
+            <div class="portfolio-item actocivico col-xs-12 col-sm-3 col-md-3" style="margin:0; padding:0;">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/actos civicos/actocivico3.jpg" alt="">
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>Dirección de Educación</h3>
+                    <p></p>
+                    <a class="preview" href="images/portfolio/full/actos civicos/actocivico3.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+
+            <div class="portfolio-item eventos col-xs-12 col-sm-3 col-md-3" style="margin:0; padding:0;">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/eventos/evento3.jpg" alt="">
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>Dirección de Educación</h3>
+                    <p></p>
+                    <a class="preview" href="images/portfolio/full/eventos/evento3.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+            <div class="portfolio-item visitas col-xs-12 col-sm-3 col-md-3" style="margin:0; padding:0;">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/visitas/visita3.jpg" alt="">
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>Dirección de Educación</h3>
+                    <p></p>
+                    <a class="preview" href="images/portfolio/full/visitas/visita3.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+            <div class="portfolio-item actocivico col-xs-12 col-sm-3 col-md-3" style="margin:0; padding:0;">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/actos civicos/actocivico4.jpg" alt="">
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>Dirección de Educación</h3>
+                    <p></p>
+                    <a class="preview" href="images/portfolio/full/actos civicos/actocivico4.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+            <div class="portfolio-item eventos col-xs-12 col-sm-3 col-md-3" style="margin:0; padding:0;">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/eventos/evento4.jpg" alt="">
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>Dirección de Educación</h3>
+                    <p></p>
+                    <a class="preview" href="images/portfolio/full/eventos/evento4.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+            <div class="portfolio-item visitas col-xs-12 col-sm-3 col-md-3" style="margin:0; padding:0;">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/visitas/visita4.jpg" alt="">
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>Dirección de Educación</h3>
+                    <p></p>
+                    <a class="preview" href="images/portfolio/full/visitas/visita4.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/#portfolio-item-->
+<br>
+
+  <section id="features" style="padding-top:300px;">
+    <div class="container">
+      <div class="row">
+        <div class="center">
+          <div class="col-md-6 col-md-offset-3">
+            <h2>Servicios</h2>
+            <hr>
+            <p class="lead">Lista de servicios que maneja Dirección de Educación</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 wow fadeInLeft">
+          <h3 >Abanderamiento de Escuelas</h3>
+          <center>
+          <img class="img-responsive" src="images/portfolio/recent/imagenesprueba/item4.jpg" alt="">
+        </center>
+          <p >Promover el respeto y valor cívico en las escuelas de educación básica, media superior y
+             superior del Municipio de Salamanca garantizando que cuenten con una Bandera para fomentar
+             en la comunidad escolar los valores cívicos que marca la Ley sobre el Escudo, la Bandera y
+             el Himno Nacional.</p>
+             <a style="color:#653049; font-weight:bold; margin-bottom:0;"
+             href="" data-toggle="modal" data-target="#imagenservicio1">
+               <!-- <img style="margin-bottom:0; margin-top:0;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAABiAAAAYgBTGnz0QAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAJuSURBVEiJ3ZVPSBRxFMc/b90ZV9AkCKJCpT9esst2CEQhgnVnFaJTHoIiSqJuRtC19RB4qS4dhCzCDkWePBg7u0LQKQ9FiNlBiMhbBEYlujs78zrMuK67Y04FHfze3u993/u+78y8+cFOgUQlqt3UhnhJ1DuMK7YMlBb+WkSzxOhtPIKrSYQkqsdRkgh7qmjL4LSJxcofiegULSSMMeA00LJtpStdxMVBvVxtBpjFdK7JKX4CxCupJuMSyrkokwEQQ/DURDgUku2kaMyCc9+nVqzI7sgC65CG78AkwkLQwwY++zmpPN5YWG1kDWt1SSxnEJXJ4OgG6FAtbwsRGUG1D5gNDl4F8bNqlk4nOtQ2CqDn/TJ9ADIeUUTTkinPoHLXDzUL5bdA/yZag9cMpKDyXrqB9ogidGsunsIrTQEFyZRfIuZ1oHWT30zpvViOgIz4w8gx4HJUERDJygBFys4FnWEv6HCd3xfs0rx5FvSo382zgJO1vHjtQRV6NN/YKeniotrGFaC5jhEz21B9vqEqd8Iabe1ExZZ0cVELTe2sOU+BL3UcKX1CtQ/hSXAyBExEFXFRbmqOfXjlh3KGH8DtOg2LleAD+RgM9hplppYX/riECekvzWneHEU1pfl4D9+cMVqNYeBgxWzO7EJ0HjSo0/mwduFOPOY0Zw6ietWPZZRW4yLou83D/GbjIzi5V5nOj3uB3tqftlirS8Cg2mYW9Bb+xu8HyW8vEhE6negg7o6D+svob/yBrZ2ILlcPHwkbG7+O7o0J9Gu9yKrziIRxgqj3iYdixtZw3Tch2Q80Oo/Xg/97M26Hf7njdw5+AV0Y75qPOZqIAAAAAElFTkSuQmCC"> -->
+               <img style="margin-bottom:1%; margin-top:0;"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAA4VBMVEVHcEz7tgD8tgD9tgD8tgD/rwD/tQD8twD7tgD7tgD/sQD8tgD/qgD9tgD8tgD/twD8tgD7tgD8twD8tgD9tQD8tQD/tAD/tQD7twD/zAD8tgD8twD/uAD7tgD8tgD/swD8tgD8tgD8tgD7tQD7tgD8twD9tQD8tgD8tgD8twD/tgD8twD8tQD8tgD7tQD7tgD7uAD9tQD/swD7tQD8tQD6twD8uAD9tgD8tgD8tgD8tgD/uwD8tgD6tAD8tgD8tgD7tgD8tgD9twD/gAD8twD6tQD8tQD9tgD8tgD/qgD8tgAUyrMtAAAASnRSTlMAjPPP+xAfsNiIDfIJdr8nk9VgwHzJIiZDBcdfGZDdCva4+kU/m3LoV1EcTq3qg9pEaCWAmDVL0ZL53w+gM/T11klqAko0T37pA6OgRXYAAACtSURBVBjTbdHVEsMgEAXQTUKkSdqk7u7u7t7y/x9UYhNael/YPczAsAAALJYIW1nvdPAyR2EuYGWDQ6qHJr91iinGGdFFWXGLIDkirv5BHNW/MWJfF6MxDSAlkilNpjDbNOxOobFRqLIoVXIsFks1Frv5cofBUKve14ZjGq+X46w9GfRGFBoCL7kv8PH5egCDbxF+0OR9AvGwste7N2QS7oT2zu5NcL6DBAlnAh+6gBUZWoWmVgAAAABJRU5ErkJggg==">
+               Requisitos de Abanderamiento de Escuelas</a>
+             <p style="color:#653049; font-weight:bold; margin-bottom:0;">* Para mayor información contáctanos*</p>
+
+        </div>
+
+        <div class="col-md-6 wow fadeInUp">
+          <h3 >Becas Firmes en la Educación</h3>
+          <center>
+          <img class="img-responsive" src="images/portfolio/recent/imagenesprueba/item.jpg" alt="">
+        </center>
+          <p>Orientar a la ciudadanía interesada en contar con un apoyo económico para  que los alumnos
+            de nivel primaria-profesional continúen con sus estudios y de esta manera contribuir a la
+            disminución del rezago educativo.</p>
+          <!-- <a style="color:#653049; font-weight:bold; margin-bottom:0;" href="convocatorias/Convocatoria Becas.pdf" target="_blank">
+            <img style="margin-bottom:1%; margin-top:0;"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAA4VBMVEVHcEz7tgD8tgD9tgD8tgD/rwD/tQD8twD7tgD7tgD/sQD8tgD/qgD9tgD8tgD/twD8tgD7tgD8twD8tgD9tQD8tQD/tAD/tQD7twD/zAD8tgD8twD/uAD7tgD8tgD/swD8tgD8tgD8tgD7tQD7tgD8twD9tQD8tgD8tgD8twD/tgD8twD8tQD8tgD7tQD7tgD7uAD9tQD/swD7tQD8tQD6twD8uAD9tgD8tgD8tgD8tgD/uwD8tgD6tAD8tgD8tgD7tgD8tgD9twD/gAD8twD6tQD8tQD9tgD8tgD/qgD8tgAUyrMtAAAASnRSTlMAjPPP+xAfsNiIDfIJdr8nk9VgwHzJIiZDBcdfGZDdCva4+kU/m3LoV1EcTq3qg9pEaCWAmDVL0ZL53w+gM/T11klqAko0T37pA6OgRXYAAACtSURBVBjTbdHVEsMgEAXQTUKkSdqk7u7u7t7y/x9UYhNael/YPczAsAAALJYIW1nvdPAyR2EuYGWDQ6qHJr91iinGGdFFWXGLIDkirv5BHNW/MWJfF6MxDSAlkilNpjDbNOxOobFRqLIoVXIsFks1Frv5cofBUKve14ZjGq+X46w9GfRGFBoCL7kv8PH5egCDbxF+0OR9AvGwste7N2QS7oT2zu5NcL6DBAlnAh+6gBUZWoWmVgAAAABJRU5ErkJggg==">
+            Convocatoria</a> -->
+            <a style="color:#653049; font-weight:bold; margin-bottom:0;"
+            href="" data-toggle="modal" data-target="#imagenservicio">
+              <!-- <img style="margin-bottom:0; margin-top:0;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAABiAAAAYgBTGnz0QAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAJuSURBVEiJ3ZVPSBRxFMc/b90ZV9AkCKJCpT9esst2CEQhgnVnFaJTHoIiSqJuRtC19RB4qS4dhCzCDkWePBg7u0LQKQ9FiNlBiMhbBEYlujs78zrMuK67Y04FHfze3u993/u+78y8+cFOgUQlqt3UhnhJ1DuMK7YMlBb+WkSzxOhtPIKrSYQkqsdRkgh7qmjL4LSJxcofiegULSSMMeA00LJtpStdxMVBvVxtBpjFdK7JKX4CxCupJuMSyrkokwEQQ/DURDgUku2kaMyCc9+nVqzI7sgC65CG78AkwkLQwwY++zmpPN5YWG1kDWt1SSxnEJXJ4OgG6FAtbwsRGUG1D5gNDl4F8bNqlk4nOtQ2CqDn/TJ9ADIeUUTTkinPoHLXDzUL5bdA/yZag9cMpKDyXrqB9ogidGsunsIrTQEFyZRfIuZ1oHWT30zpvViOgIz4w8gx4HJUERDJygBFys4FnWEv6HCd3xfs0rx5FvSo382zgJO1vHjtQRV6NN/YKeniotrGFaC5jhEz21B9vqEqd8Iabe1ExZZ0cVELTe2sOU+BL3UcKX1CtQ/hSXAyBExEFXFRbmqOfXjlh3KGH8DtOg2LleAD+RgM9hplppYX/riECekvzWneHEU1pfl4D9+cMVqNYeBgxWzO7EJ0HjSo0/mwduFOPOY0Zw6ietWPZZRW4yLou83D/GbjIzi5V5nOj3uB3tqftlirS8Cg2mYW9Bb+xu8HyW8vEhE6negg7o6D+svob/yBrZ2ILlcPHwkbG7+O7o0J9Gu9yKrziIRxgqj3iYdixtZw3Tch2Q80Oo/Xg/97M26Hf7njdw5+AV0Y75qPOZqIAAAAAElFTkSuQmCC"> -->
+              <img style="margin-bottom:1%; margin-top:0;"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAA4VBMVEVHcEz7tgD8tgD9tgD8tgD/rwD/tQD8twD7tgD7tgD/sQD8tgD/qgD9tgD8tgD/twD8tgD7tgD8twD8tgD9tQD8tQD/tAD/tQD7twD/zAD8tgD8twD/uAD7tgD8tgD/swD8tgD8tgD8tgD7tQD7tgD8twD9tQD8tgD8tgD8twD/tgD8twD8tQD8tgD7tQD7tgD7uAD9tQD/swD7tQD8tQD6twD8uAD9tgD8tgD8tgD8tgD/uwD8tgD6tAD8tgD8tgD7tgD8tgD9twD/gAD8twD6tQD8tQD9tgD8tgD/qgD8tgAUyrMtAAAASnRSTlMAjPPP+xAfsNiIDfIJdr8nk9VgwHzJIiZDBcdfGZDdCva4+kU/m3LoV1EcTq3qg9pEaCWAmDVL0ZL53w+gM/T11klqAko0T37pA6OgRXYAAACtSURBVBjTbdHVEsMgEAXQTUKkSdqk7u7u7t7y/x9UYhNael/YPczAsAAALJYIW1nvdPAyR2EuYGWDQ6qHJr91iinGGdFFWXGLIDkirv5BHNW/MWJfF6MxDSAlkilNpjDbNOxOobFRqLIoVXIsFks1Frv5cofBUKve14ZjGq+X46w9GfRGFBoCL7kv8PH5egCDbxF+0OR9AvGwste7N2QS7oT2zu5NcL6DBAlnAh+6gBUZWoWmVgAAAABJRU5ErkJggg==">
+              Requisitos de Becas Firmes en la Educación</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="normativa" style="padding-top:300px;">
+    <div class="container">
+      <div class="row">
+        <div class="center">
+          <div class="col-md-6 col-md-offset-3">
+            <h2>Normativa</h2>
+            <hr>
+            <p class="lead"  style="font-size:17px;"></p>
+          </div>
+        </div>
+
+        <div class="col-md-4 wow fadeInLeft">
+          <h4>Ley de Educación para el Estado de Guanajuato</h4>
+          <a href="normatividad/Ley_de_Educacion_para_el_Estado_de_Guanajuato.pdf" target="_blank"> <img alt=" " src="data:image/png;base64,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" ">
+            </a>
+
+          <!-- <p>Las disposiciones de esta Ley son de orden público y tienen por objeto regular la educación que
+            imparten el Estado y los municipios de Guanajuato, así como los organismos descentralizados del
+            sector educativo y los particulares, de conformidad con lo establecido por el artículo 3o. de la
+            Constitución Política de los Estados Unidos Mexicanos, la Ley General de Educación, la Ley General
+            del Servicio Profesional Docente, la Ley del Instituto Nacional para la Evaluación de la Educación y
+            demás disposiciones normativas.</p> -->
+        </div>
+
+        <div class="col-md-4 wow fadeInUp">
+          <h4>Ley de Convivencia Libre de Violencia en Entorno Escolar </h4>
+          <a href="normatividad/Ley_para_una_Convivencia_Libre__de_Violencia_en_el_Entorno_Escolar_PO.pdf" target="_blank">
+          <img  src="data:image/png;base64,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" alt="">
+          </a>
+          <!-- <p>La presente Ley es de orden público e interés social y de observancia general en el Estado de Guanajuato.
+            Tiene por objeto, establecer las bases que permitan el establecimiento de las políticas públicas para
+            prevenir, atender y erradicar la violencia en el entorno escolar, así como distribuir las competencias
+            entre el Estado y los Municipios.</p> -->
+        </div>
+
+        <div class="col-md-4 wow fadeInRight">
+          <h4>Ley para Prevenir Atender y Erradicar la Violencia en el Estado de Guanajuato 2015</h4>
+          <a href="normatividad/LEYPARAPREVENIR,ATENDERYERRADICARLAVIOLENCIAENELESTADODEGUANAJUATO-1-2015.pdf" target="_blank">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGIAAABiABHxB+uAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAApvSURBVHic7Z1rkBxVGYafr6e7dzdUbtyilMWttBQRJBBuQYSF3cxmuUQIpPQHRKtEygtiQCtocVV/iBIuKaEoKJEEAQkkEJLK7uzGrIK1QIhEVBJQAUEQTFxNNoQk3TP9+WMDzMwOPduX6Zne3effnD7nO2/3W9Onu89NqAG6AYsB83SQucB04BCgCZhSi/pGgAu6FWQT8CDb3V/JPJw6afFF4gymq5mKbS9E9RJg3zhjx8wrqFwhHc7KegspJxZDVBF6zQWoXA1MjSNmQtzNRPdymcmuegt5j8iGaB9T2GP/GtFsHILqwAYy7tnSxr/rLQQiGqJrOICM9RvgqJj01IvN5DOz5azdr9VbSGhDdBUTsK0ngONi1FNPBkDPlWy+v54ijNAlLes2Ro8ZAPuBrNGcdWI9RYT6h2i3eSoiT4w0O8JmPN5C+G+Y+sKhAnIacEDAgtuBrGTdZ2ogqiqBDVFF6LH6gZOqZN2NymIymdulfdfr4eRFY+i2aj4AMidg0e0YdEi7+3RNhPkQ3JBuswORrirZXsWQOdLu/DmkrtjQNUwiY71G8JfSupgSvA0ROb9Kji3kM62NYAaAdDII5EIUnYxHTrvMk+PW5EcgQ/R6DJCz/XPJpY3w+FiCyEshS07CkJzmzM/HqseHYP+QU+wjQT/qk+M5yTqPRZNUAzz9R4TSE0G6tNtsi0uOH8EMKXCEfwZ9NIKWGiI7IwaYgMgq7TY7YpHjQ8A2RA/0P2w0RLsxDCUfQ5RmRB7XHvu8GGJ9KMEMEW3xPZ7xBqKIqRlCIaZIFqoPanfmrJjiDSOgIVUekxWNIiYlNCHG8lqZEv7TydimCTFWas7+YtyBxw0JTwZ0adxtyrgh0bBQfShOU8YNic5QQ5/LzI4j2Lgh8dAExgrtNT8XNdC4IfHRjCePaVfTJ6MEGTckXvbD8Lp0LdPCBhg3JH4Oo2A9rH2YYQqPG1IbTsWxrwtTcNyQmqELtafpE0FLjQ1DxPtfHWq18LwbghYaG4ZMzD8L+mbi9Qrna1+wruMxYYjMZBfKl4F3Eq66CbcpUG9jqCeBNCId+bWaaz4aClcBhwcsPgUQFAPRaSDTgMyISqp3SJCKxowhAJLd/SpwadQ4upKJtNhtqF4PHO1faZU+pDLGxC0rbmQOO2SW8yi4MxE2xRl73JAISJadKD+PM2Yqb1naM+EgtHAcgmDworTt+Wsd1bwU57ynVBmi/bTwjnUz6n4VMFGgAJozH8HJz5dzeDdxUcKeODuuU2UIO6wlwIXDD8gF2NYWcL+ZuKaYSU0bor3WSVQ0432+or1MTkpPrUiNIRSkszRBulB+X5TQgtpnJKqpBqTHENGDSn9zNyJ3luU6JjlBtSE9bYjgljae3k6UbUjxE06VkZUpID3/EJUdZSnHYGCVpcUxZLSupMcQYWNZwnzUKF2cwJPBBBXVhPQY4hr9UHTTUj4NXFSayRs3JCn2TgIqm16mpU9eavwtOUW1ITWGAKAs8z+eWZ+QkpqRLkM89x6Gpi1X4k/SueuNJOXUglQZMjSBUyp/XVVpuJV9wpAqQ4ZwFkOF1XtUVyWvJX5SZ4hk2YKwpDRV36TD3VAfRfGSOkP28mLpTzHpwq6PlHhJpyGqZ5alTMO0f1AXLTGTOkN0GRmQ4UNrVK/SnP2pOkiKldQZwmTrGKjY72EDt6nGu45k0qTPEBl2uyqa8qyz6DUXJKonZtJniJavtWKcB+wuOn5j0gvGxEmqDNG17EfpOl1/l+yeVaDXFKWZGHK/5khl30iqDMGzLoCiPhChG4BZ+UVQsobXYWCt1H4CjRpsBNJliHJxWcIqABGUgjMf+GfRwZPYYd6vG4Z1YjU0qenC3bs45cyipEHy+d+990M62aprpIOMPsn7q2rLeQyYD+uy/LxKS4vrSiZitUzGKExGtBmAgvu6dLK1lufiR2oMAa4s/Sl3SCd7SlI6nU2aM88B6QUm7E2dw2R7pXYZX8fCwCu043EawsnAocN6fTMWmuMV0Hso5G8qr6PWpOKWpb32EUDx0oKDqPOzSnklm+9HvXmUXGntwCi8SqHwMsqdCF8CDvWp8nCQH2NaT2of+0c/g5GTjn+I5/0QpGg+ht4sHaVLzmofzew2pyNyInAC8C4wKVK9yvE41iJw50eKE4CGN0R7rBkocz9Ikbew3UWqCDlrOqKzEWnD4WQMmkJUsRN4ARhk6AnuYOCwDwTQWblYbWhoQ4YuOreUrtPl3YJjXkYP30D4GAgRBzvvAwwicgeetwOMfRBdzJAxIOyv/bQktYNCQxtCzr4Q0bL1Q+Q6hi5iNQaBPyCyHo9nEW0HvkbluQNtqLYNDbob5u7LSW5n0bCGaB/NOHpjhUMfYoa8DboOWEdBnmK986Jcj1eUYbnmzAdAbgGODSDl9gB5I9OwhuCYC/B/EgJ4HtUVIKvJOhtF/G9eks0/ocoMepvOQb3LgdPwn7x5D9vdxcGER6PhDNn7AvgdKG7IS/BQHgJulQ438LCfIdP2PA48rjkORK0soocj8hEUQWQbqm+isk46nBcinEooGsIQXUaGSfZcRBfw4Yv8K+gK1LgurgslWbaAe18cseKirobs3WnhYuBaUJ+547Ia0WtkVv6PiYmrE3UzRLuaDyVXuA+h2ips65nlnFutfRgt1OXTiXbbczEKG0dgBqBXjxUzoA6GaLd5JaKPMHw/D294bumRbL43CV2NQqKGaLfZhkj5R0EH0WuBV8rSCxh8NyFpDUOy/xCRGyh9U94COhvPOAX4eEle1YWNsilMkiRmiPbRzNBX2PcoIHIlyPcrbEq5VDryi5LS1kgk95Q1kQID5IvqzKBa6R3gSWw38oo9aSWxf4jMwAUe8c2kkgN3trQWDesZYyTbhtjuZUBfhSMOyE9ocs6WLFF3w0k1ib4YSivbdJnbzhTrIpQzgSaQTeSNXzbcRmJ1IvE3dZlHAdx7gXuTrjsNpGKQw1hi3JAGI5gh1faYqrZH1WjEq3INA+7LFXBTMPFfsU2NoDszjwKMKoO6JdBawcEM8cR/iKV6RwaKNxoQ7zO+x1W2BAkXzJAMm/0zSE03XWxMqpyzV+2alRLMkDbnL6D/8slxrObsLwSKmWI0Z18AfNYnxxvMdmpniAiKSpX9bvUXYbZpSBtD56h3+eeSFUE710I89uryKhn2Rb2c9tpHBY+dDrTLPhr1eoCpVXJWu1bDCPWYqjlrHdBaJdtuVBaTydwu7bteD1NPo6G9LQfjFb4F+m2oOo54rWTd9qB1hDOkyzoeg2dGWF4RNqO8TcVu2lSQQZiGcgQjO2cPgxnS7m6snrWU0C9y2m3dinB52PKjG7lJss73wpQM/+nkafcKkDWhy49aZDVPOQtDl45StfaxP461Dhi1DXhAnkfdM8onEwUh0sdFaeU/2O4JwNIocUYJSyi4J0YxA2LaZ0EVoddcgMrVVH0UHHUMIPyIdndxHAP6Yv06q6uZim0vRPUS3p+aPGoZALkL2/mptLItrqA1+VyuG7AYME8HmQtMBw4BDiC9/S8esBV4DeE5PF1OU/630hr/Str/B3apJh695pfkAAAAAElFTkSuQmCC " alt="">
+          </a>
+          <!-- <p>La presente Ley es de orden público e interés social, y tiene por
+            objeto establecer: Las bases para la prevención, atención y erradicación de la violencia, que no
+            incurran en el ámbito penal, en el Estado de Guanajuato; La organización y funcionamiento del Sistema Estatal
+            para la prevención, atención y erradicación de la violencia; y La coordinación entre el Estado y los
+            municipios para prevenir, atender y erradicar la violencia.</p> -->
+        </div>
+
+        <div class="col-md-4 wow fadeInRight">
+          <h4>Ley sobre El Escudo, La Bandera y El Himno Nacionales</h4>
+          <a href="normatividad/LEY_SOBRE_EL_ESCUDO_LA_BANDERA_Y_EL_HIMNO_NACIONALES.pdf" target="_blank">
+          <img src="data:image/png;base64,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 " alt="">
+          </a>
+          <!-- <p>La presente Ley es de orden público e interés social, y tiene por
+            objeto establecer: Las bases para la prevención, atención y erradicación de la violencia, que no
+            incurran en el ámbito penal, en el Estado de Guanajuato; La organización y funcionamiento del Sistema Estatal
+            para la prevención, atención y erradicación de la violencia; y La coordinación entre el Estado y los
+            municipios para prevenir, atender y erradicar la violencia.</p> -->
+        </div>
+        <div class="col-md-4 wow fadeInRight">
+          <h4>Reglamento Ley de Convivencia</h4>
+          <a href="normatividad/ReglamentoLeyConvivencia.pdf" target="_blank">
+          <img src="data:image/png;base64,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 " alt="">
+          </a>
+          <!-- <p>La presente Ley es de orden público e interés social, y tiene por
+            objeto establecer: Las bases para la prevención, atención y erradicación de la violencia, que no
+            incurran en el ámbito penal, en el Estado de Guanajuato; La organización y funcionamiento del Sistema Estatal
+            para la prevención, atención y erradicación de la violencia; y La coordinación entre el Estado y los
+            municipios para prevenir, atender y erradicar la violencia.</p> -->
+        </div>
+
+        <div class="col-md-4 wow fadeInRight">
+          <h4>Reglamento Estructura Orgánica de la Admin. Pública de Salamanca Marzo 2019</h4>
+          <a href="normatividad/reglamento_de_la_estructura_organica_de_la_administracion_publica_municipal_centralizada_del_municipio_de_salamanca_guanajuato_mar_2019.pdf" target="_blank">
+          <img src="data:image/png;base64,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 " alt="">
+          </a>
+          <!-- <p>La presente Ley es de orden público e interés social, y tiene por
+            objeto establecer: Las bases para la prevención, atención y erradicación de la violencia, que no
+            incurran en el ámbito penal, en el Estado de Guanajuato; La organización y funcionamiento del Sistema Estatal
+            para la prevención, atención y erradicación de la violencia; y La coordinación entre el Estado y los
+            municipios para prevenir, atender y erradicar la violencia.</p> -->
+        </div>
+
+        <div class="col-md-4 wow fadeInRight" >
+          <h4>Acuerdo 08-08-17 COMUPASE Secretaría de Educación Pública</h4>
+          <a href="normatividad/ACUERDO08_08_17COMUPASE.pdf" target="_blank">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAGIAAABiABHxB+uAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAApvSURBVHic7Z1rkBxVGYafr6e7dzdUbtyilMWttBQRJBBuQYSF3cxmuUQIpPQHRKtEygtiQCtocVV/iBIuKaEoKJEEAQkkEJLK7uzGrIK1QIhEVBJQAUEQTFxNNoQk3TP9+WMDzMwOPduX6Zne3effnD7nO2/3W9Onu89NqAG6AYsB83SQucB04BCgCZhSi/pGgAu6FWQT8CDb3V/JPJw6afFF4gymq5mKbS9E9RJg3zhjx8wrqFwhHc7KegspJxZDVBF6zQWoXA1MjSNmQtzNRPdymcmuegt5j8iGaB9T2GP/GtFsHILqwAYy7tnSxr/rLQQiGqJrOICM9RvgqJj01IvN5DOz5azdr9VbSGhDdBUTsK0ngONi1FNPBkDPlWy+v54ijNAlLes2Ro8ZAPuBrNGcdWI9RYT6h2i3eSoiT4w0O8JmPN5C+G+Y+sKhAnIacEDAgtuBrGTdZ2ogqiqBDVFF6LH6gZOqZN2NymIymdulfdfr4eRFY+i2aj4AMidg0e0YdEi7+3RNhPkQ3JBuswORrirZXsWQOdLu/DmkrtjQNUwiY71G8JfSupgSvA0ROb9Kji3kM62NYAaAdDII5EIUnYxHTrvMk+PW5EcgQ/R6DJCz/XPJpY3w+FiCyEshS07CkJzmzM/HqseHYP+QU+wjQT/qk+M5yTqPRZNUAzz9R4TSE0G6tNtsi0uOH8EMKXCEfwZ9NIKWGiI7IwaYgMgq7TY7YpHjQ8A2RA/0P2w0RLsxDCUfQ5RmRB7XHvu8GGJ9KMEMEW3xPZ7xBqKIqRlCIaZIFqoPanfmrJjiDSOgIVUekxWNIiYlNCHG8lqZEv7TydimCTFWas7+YtyBxw0JTwZ0adxtyrgh0bBQfShOU8YNic5QQ5/LzI4j2Lgh8dAExgrtNT8XNdC4IfHRjCePaVfTJ6MEGTckXvbD8Lp0LdPCBhg3JH4Oo2A9rH2YYQqPG1IbTsWxrwtTcNyQmqELtafpE0FLjQ1DxPtfHWq18LwbghYaG4ZMzD8L+mbi9Qrna1+wruMxYYjMZBfKl4F3Eq66CbcpUG9jqCeBNCId+bWaaz4aClcBhwcsPgUQFAPRaSDTgMyISqp3SJCKxowhAJLd/SpwadQ4upKJtNhtqF4PHO1faZU+pDLGxC0rbmQOO2SW8yi4MxE2xRl73JAISJadKD+PM2Yqb1naM+EgtHAcgmDworTt+Wsd1bwU57ynVBmi/bTwjnUz6n4VMFGgAJozH8HJz5dzeDdxUcKeODuuU2UIO6wlwIXDD8gF2NYWcL+ZuKaYSU0bor3WSVQ0432+or1MTkpPrUiNIRSkszRBulB+X5TQgtpnJKqpBqTHENGDSn9zNyJ3luU6JjlBtSE9bYjgljae3k6UbUjxE06VkZUpID3/EJUdZSnHYGCVpcUxZLSupMcQYWNZwnzUKF2cwJPBBBXVhPQY4hr9UHTTUj4NXFSayRs3JCn2TgIqm16mpU9eavwtOUW1ITWGAKAs8z+eWZ+QkpqRLkM89x6Gpi1X4k/SueuNJOXUglQZMjSBUyp/XVVpuJV9wpAqQ4ZwFkOF1XtUVyWvJX5SZ4hk2YKwpDRV36TD3VAfRfGSOkP28mLpTzHpwq6PlHhJpyGqZ5alTMO0f1AXLTGTOkN0GRmQ4UNrVK/SnP2pOkiKldQZwmTrGKjY72EDt6nGu45k0qTPEBl2uyqa8qyz6DUXJKonZtJniJavtWKcB+wuOn5j0gvGxEmqDNG17EfpOl1/l+yeVaDXFKWZGHK/5khl30iqDMGzLoCiPhChG4BZ+UVQsobXYWCt1H4CjRpsBNJliHJxWcIqABGUgjMf+GfRwZPYYd6vG4Z1YjU0qenC3bs45cyipEHy+d+990M62aprpIOMPsn7q2rLeQyYD+uy/LxKS4vrSiZitUzGKExGtBmAgvu6dLK1lufiR2oMAa4s/Sl3SCd7SlI6nU2aM88B6QUm7E2dw2R7pXYZX8fCwCu043EawsnAocN6fTMWmuMV0Hso5G8qr6PWpOKWpb32EUDx0oKDqPOzSnklm+9HvXmUXGntwCi8SqHwMsqdCF8CDvWp8nCQH2NaT2of+0c/g5GTjn+I5/0QpGg+ht4sHaVLzmofzew2pyNyInAC8C4wKVK9yvE41iJw50eKE4CGN0R7rBkocz9Ikbew3UWqCDlrOqKzEWnD4WQMmkJUsRN4ARhk6AnuYOCwDwTQWblYbWhoQ4YuOreUrtPl3YJjXkYP30D4GAgRBzvvAwwicgeetwOMfRBdzJAxIOyv/bQktYNCQxtCzr4Q0bL1Q+Q6hi5iNQaBPyCyHo9nEW0HvkbluQNtqLYNDbob5u7LSW5n0bCGaB/NOHpjhUMfYoa8DboOWEdBnmK986Jcj1eUYbnmzAdAbgGODSDl9gB5I9OwhuCYC/B/EgJ4HtUVIKvJOhtF/G9eks0/ocoMepvOQb3LgdPwn7x5D9vdxcGER6PhDNn7AvgdKG7IS/BQHgJulQ438LCfIdP2PA48rjkORK0soocj8hEUQWQbqm+isk46nBcinEooGsIQXUaGSfZcRBfw4Yv8K+gK1LgurgslWbaAe18cseKirobs3WnhYuBaUJ+547Ia0WtkVv6PiYmrE3UzRLuaDyVXuA+h2ips65nlnFutfRgt1OXTiXbbczEKG0dgBqBXjxUzoA6GaLd5JaKPMHw/D294bumRbL43CV2NQqKGaLfZhkj5R0EH0WuBV8rSCxh8NyFpDUOy/xCRGyh9U94COhvPOAX4eEle1YWNsilMkiRmiPbRzNBX2PcoIHIlyPcrbEq5VDryi5LS1kgk95Q1kQID5IvqzKBa6R3gSWw38oo9aSWxf4jMwAUe8c2kkgN3trQWDesZYyTbhtjuZUBfhSMOyE9ocs6WLFF3w0k1ib4YSivbdJnbzhTrIpQzgSaQTeSNXzbcRmJ1IvE3dZlHAdx7gXuTrjsNpGKQw1hi3JAGI5gh1faYqrZH1WjEq3INA+7LFXBTMPFfsU2NoDszjwKMKoO6JdBawcEM8cR/iKV6RwaKNxoQ7zO+x1W2BAkXzJAMm/0zSE03XWxMqpyzV+2alRLMkDbnL6D/8slxrObsLwSKmWI0Z18AfNYnxxvMdmpniAiKSpX9bvUXYbZpSBtD56h3+eeSFUE710I89uryKhn2Rb2c9tpHBY+dDrTLPhr1eoCpVXJWu1bDCPWYqjlrHdBaJdtuVBaTydwu7bteD1NPo6G9LQfjFb4F+m2oOo54rWTd9qB1hDOkyzoeg2dGWF4RNqO8TcVu2lSQQZiGcgQjO2cPgxnS7m6snrWU0C9y2m3dinB52PKjG7lJss73wpQM/+nkafcKkDWhy49aZDVPOQtDl45StfaxP461Dhi1DXhAnkfdM8onEwUh0sdFaeU/2O4JwNIocUYJSyi4J0YxA2LaZ0EVoddcgMrVVH0UHHUMIPyIdndxHAP6Yv06q6uZim0vRPUS3p+aPGoZALkL2/mptLItrqA1+VyuG7AYME8HmQtMBw4BDiC9/S8esBV4DeE5PF1OU/630hr/Str/B3apJh695pfkAAAAAElFTkSuQmCC " alt="">
+          </a>
+          <!-- <p>La presente Ley es de orden público e interés social, y tiene por
+            objeto establecer: Las bases para la prevención, atención y erradicación de la violencia, que no
+            incurran en el ámbito penal, en el Estado de Guanajuato; La organización y funcionamiento del Sistema Estatal
+            para la prevención, atención y erradicación de la violencia; y La coordinación entre el Estado y los
+            municipios para prevenir, atender y erradicar la violencia.</p> -->
+        </div>
+
+      </div>
+    </div>
+  </section>
+<br><br>
+<br>
+<br>
+  <section id="convenios" style="padding-top:300px;">
+    <div class="container col-md-12" >
+      <div class="center">
+        <div class="col-md-6 col-md-offset-3">
+          <h2>Convenios</h2>
+          <hr>
+          <p class="lead" style="font-size:17px;">Serie de convenios que tiene Dirección de Educación con diversas instituciones educativas</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="col-lg-12 col-md-12">
+        <ul class="portfolio-filter text-center">
+          <li><a class="btn btn-default active" href="#" data-filter="*">TODOS</a></li>
+          <li><a class="btn btn-default" href="#" data-filter=".cetesa">CETESA</a></li>
+          <li><a class="btn btn-default" href="#" data-filter=".inaeba">INAEBA</a></li>
+          <li><a class="btn btn-default" href="#" data-filter=".sip">SIP</a></li>
+          <li><a class="btn btn-default" href="#" data-filter=".udl">UDL</a></li>
+          <li><a class="btn btn-default" href="#" data-filter=".lasalle">LA SALLE</a></li>
+          <li><a class="btn btn-default" href="#" data-filter=".univer">UNIVER</a></li>
+          <li><a class="btn btn-default" href="#" data-filter=".uts">UTS</a></li>
+          <li><a class="btn btn-default" href="#" data-filter=".uveg">UVEG</a></li>
+          <li><a class="btn btn-default" href="#" data-filter=".vocacional">VOCACIONAL</a></li>
+
+        </ul>
+        <!--/#portfolio-filter-->
+
+        <div class="row">
+          <div class="portfolio-items">
+            <div class="portfolio-item apps cetesa col-xs-12 col-sm-3 col-md-3" style="margin:0; padding:0;">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/LOGOTIPOS INST. CONVENIOS/logocetesa.jpg" alt="" >
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>CETESA</h3>
+                    <p></p>
+                    <!-- <a class="preview" href="images/portfolio/full/item1.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a><br> -->
+                      <a class="preview" href=""  data-toggle="modal" data-target="#conveniomodal1" >
+                        <i class="fa fa-eye"></i>
+                        Ver ficha del convenio</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+
+            <div class="portfolio-item inaeba col-xs-12 col-sm-3 col-md-3" style="margin:0; padding:0;">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/LOGOTIPOS INST. CONVENIOS/logoinaeba.jpg" alt="">
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>INAEBA</h3>
+                    <p></p>
+                    <!-- <a class="preview" href="images/portfolio/full/item2.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a> -->
+                      <a class="preview"href=""  data-toggle="modal" data-target="#conveniomodal2"><i class="fa fa-eye"></i>
+                        Ver ficha del convenio</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+
+            <div class="portfolio-item sip col-xs-12 col-sm-3 col-md-3" style="margin:0; padding:0;">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/LOGOTIPOS INST. CONVENIOS/logosip.jpg" alt="">
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>SIP</h3>
+                    <p></p>
+                    <!-- <a class="preview" href="images/portfolio/full/item3.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a> -->
+                      <a class="preview" href=""  data-toggle="modal" data-target="#conveniomodal3"><i class="fa fa-eye"></i>
+                        Ver ficha del convenio</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+
+            <div class="portfolio-item udl col-xs-12 col-sm-3 col-md-3" style="margin:0; padding:0;">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/LOGOTIPOS INST. CONVENIOS/logoudl.jpg" alt="">
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>UDL</h3>
+                    <p></p>
+                    <!-- <a class="preview" href="images/portfolio/full/item4.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a> -->
+                      <a class="preview" href=""  data-toggle="modal" data-target="#conveniomodal4"><i class="fa fa-eye"></i>
+                        Ver ficha del convenio</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+
+            <div class="portfolio-item lasalle col-xs-12 col-sm-3 col-md-3" style="margin:0; padding:0;">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/LOGOTIPOS INST. CONVENIOS/delasalle.png" alt="">
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>UNIVERSIDAD DE LA SALLE BAJÍO</h3>
+                    <p></p>
+                    <!-- <a class="preview" href="images/portfolio/full/item5.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a> -->
+                      <a class="preview" href=""  data-toggle="modal" data-target="#conveniomodal5"><i class="fa fa-eye"></i>
+                        Ver ficha del convenio</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+
+            <div class="portfolio-item univer col-xs-12 col-sm-3 col-md-3" style="margin:0; padding:0;">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/LOGOTIPOS INST. CONVENIOS/logouniver.jpg" alt="">
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>UNIVER</h3>
+                    <p></p>
+                    <!-- <a class="preview" href="images/portfolio/full/item6.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a> -->
+                      <a class="preview" href=""  data-toggle="modal" data-target="#conveniomodal6"><i class="fa fa-eye"></i>
+                        Ver ficha del convenio</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+
+            <div class="portfolio-item uts col-xs-12 col-sm-3 col-md-3" style="margin:0; padding:0;">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/LOGOTIPOS INST. CONVENIOS/logouts.png" alt="">
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>UTS</h3>
+                    <p></p>
+                    <!-- <a class="preview" href="images/portfolio/full/item7.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a> -->
+                      <a class="preview" href=""  data-toggle="modal" data-target="#conveniomodal7"><i class="fa fa-eye"></i>
+                        Ver ficha del convenio</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+
+            <div class="portfolio-item uveg col-xs-12 col-sm-3 col-md-3" style="margin:0; padding:0;">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/LOGOTIPOS INST. CONVENIOS/logouveg.jpg" alt="">
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>UVEG</h3>
+                    <p></p>
+                    <!-- <a class="preview" href="images/portfolio/full/item8.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a> -->
+                      <a class="preview" href=""  data-toggle="modal" data-target="#conveniomodal8"><i class="fa fa-eye"></i>
+                        Ver ficha del convenio</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+            <div class="portfolio-item vocacional col-xs-12 col-sm-3 col-md-3" style="margin:0; padding:0;">
+              <div class="recent-work-wrap">
+                <img class="img-responsive" src="images/portfolio/recent/LOGOTIPOS INST. CONVENIOS/vocacional.png" alt="">
+                <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>VOCACIONAL 18 DE MARZO</h3>
+                    <p></p>
+                    <!-- <a class="preview" href="images/portfolio/full/item8.jpg" rel="prettyPhoto"><i class="fa fa-eye"></i>
+                      Ver</a> -->
+                      <a class="preview" href=""  data-toggle="modal" data-target="#conveniomodal9"><i class="fa fa-eye"></i>
+                        Ver ficha del convenio</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.portfolio-item-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br><br>
+<br><br><br>
+
+  <section id="culturacivica" style="padding-top:300px;">
+    <div class="container">
+      <div class="row">
+        <div class="center">
+          <br>
+          <div class="">
+            <h2>Cultura Cívica</h2>
+            <hr>
+            <p class="lead"  style="font-size:17px;">
+              </p>
+          </div>
+        </div>
+        <div class="" >
+          <h3>Calendario de Actos Cívicos</h3>
+          <div class="text-right">
+            <button type="button" class="btn btn-primary btn-lg" style="border-radius:5px 5px 5px 5px; background-color: #fcb600;
+            color:white;" data-toggle="modal" data-target="#agenda">Agenda General del Mes</button>
+          </div>
+          <img class="" src="" alt="">
+          <div class="" id="menu2">
+            <div id="calendar"></div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14941.382165504183!2d-101.1957283!3d20.5739418!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842c850db97b65ab%3A0x5d2edd08c0552c54!2sDirecci%C3%B3n+de+Educaci%C3%B3n+Municipal!5e0!3m2!1ses-419!2smx!4v1560443933904!5m2!1ses-419!2smx"
+     width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
+  </div>
+
+  <section id="contact" style="padding-top:300px;">
+    <div class="contact-page">
+      <div class="container">
+        <div class="center">
+          <h2>CONTÁCTANOS</h2>
+            <h3 style="text-align:center; margin:0;">Tel. ( 464 )   64  7  33  71</h3>
+        </div>
+        <div class="row contact-wrap">
+          <div class="col-md-8 col-md-offset-2">
+            <div id="sendmessage" style="color:black;">Tu mensaje ha sido enviado. ¡Gracias!</div>
+            <div id="errormessage" style="color:green;">Su mensaje fue enviado correctamente, gracias por contactarnos.</div>
+            <form action="" method="post" role="form" class="contactForm" name="enviar_email" id="enviar_email" >
+              <div class="form-group">
+                <input type="text" name="nombre" class="form-control" id="nombre"  placeholder="Nombre" data-rule="minlen:4"
+                  data-msg="Por favor introduce al menos 4 letras " />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" name="correo_origen" id="correo_origen" placeholder="Correo Electrónico" data-rule="email"
+                  data-msg="Por favor introduce un email válido" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="asunto" id="asunto" placeholder="Asunto" data-rule="minlen:8"
+                  data-msg="Por favor introduce al menos 8 letras en Asunto " />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <textarea type="textarea" class="form-control" id="mensaje" name="mensaje" rows="5" data-rule="required" data-msg="Por favor escribe algo para nosotros "
+                  placeholder = "Mensaje"></textarea>
+                <div class="validation"></div>
+              </div>
+
+              <div class="text-center">
+                <!-- <a class="btn btn-primary btn-lg" href="submit" type="submit" onclick="submitForm()" id="form-submit">Enviar mensaje</a> -->
+                <button type="submit" value="submit" onclick="" id="resultado_mensaje" class="btn btn-primary btn-lg">Enviar mensaje</button>
+              </div>
+              <div id="mensaje_hecho" class="h3 text-center hidden">Message Submitted!</div>
+            </form>
+          </div>
+        </div>
+        <!--/.row-->
+      </div>
+      <!--/.container-->
+    </div>
+  </section>
+    <!--/#contact-page-->
+
+<footer class="">
+  <div class="footer img-responsive" style=" width:auto; height:auto;">
+  <div class="" style="text-align:center; " >
+    <br>
+    <a href="https://www.facebook.com/GobSalamanca/" target="_blank">
+    <img src="data:image/png;base64,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">
+    </a>
+    <a href="https://twitter.com/GobSalamanca" target="_blank">
+      <img src="data:image/png;base64,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">
+    </a>
+    <!-- <a href="https://twitter.com/GobSalamanca" target="_blank">
+  <img src="data:image/png;base64,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">
+    </a> -->
+    </div>
+    <div class="container">
+      <br>
+      <p style="font-size:14px; margin-top:20px; text-align:center; color:#ffffff;">
+        <img style="margin-top:-0.5%;" src="">
+        <span style="color:#ffffff;"  class="glyphicon glyphicon-earphone"></span>&nbsp;&nbsp;
+        (&nbsp;464&nbsp;)&nbsp;&nbsp; 64&nbsp; 7 &nbsp;33 &nbsp;71 <br>
+        <!-- <img style="margin-top:-0.5%;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAABOgAAAToBzZiNlQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEYSURBVDiNxZTBSkJBFIb/Ey5yk6tQ2kUvUOEuEve9hhRFzxC08g1Ceg034sKNuAnxEVyKtMlFGrn52lzhMI7X0YJ+GJgz5z/fnMNcrvTHsm0G4EzSaRaOzWy8103AJTBgXX3gfFdYHZhHYCt9ArVUWAl4z4GtNAWOwvqDCPNW0rGLPyQ1szVz52VJjZQOu0EnVy5XC3KdFODIFSyCnAFfLj8M62MjT9y+6DuUdC3pcINXklSIAHuSblzcBlrZ/j7izRdwEoy1SQugEtavjWxmE0mt8DyiFzObJvgkoEL+hz0HykkwB33OAT7tBMuABWAYgb0BscdMglaBpYN9Axd7wRz00QEftvlT/ocm6VUSku7MjF91+O/6AThnjSYmMXHuAAAAAElFTkSuQmCC" alt=""> -->
+        <a target="_blank" href="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14941.382165504183!2d-101.1957283!3d20.5739418!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842c850db97b65ab%3A0x5d2edd08c0552c54!2sDirecci%C3%B3n+de+Educaci%C3%B3n+Municipal!5e0!3m2!1ses-419!2smx!4v1560443933904!5m2!1ses-419!2smx">
+        <span style="color:#ffffff;" class="glyphicon glyphicon-map-marker" ></span></a>&nbsp;&nbsp;
+        <a style="color:#ffffff;" target="_blank"
+        href="https://www.google.com/maps/place/Direcci%C3%B3n+de+Educaci%C3%B3n+Municipal/@20.566015,-101.197646,14z/data=!4m5!3m4!1s0x0:0x5d2edd08c0552c54!8m2!3d20.5660151!4d-101.1976457?hl=es-419">
+        Calle Vasco de Quiroga 213, &nbsp;Zona Centro</a><br><br>
+        <!-- Última Actualización: &nbsp;&nbsp; 22/07/2019. -->
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!--  -->
+<!-- Modal -->
+ <div class="modal fade" id="modalmensaje" role="dialog">
+   <div class="modal-dialog">
+
+     <!-- Modal content-->
+     <div class="modal-content">
+       <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal">&times;</button>
+         <h4 class="modal-title" style="text-align:center; font-weight:bold;">¡GRACIAS POR CONTACTÁRNOS!</h4>
+       </div>
+       <div class="modal-body">
+         <center>
+         <img src="images/check-circle.gif" alt="" style="height:150px; width:150px;" class="img-responsive">
+       </center>
+       <p style="text-align:center;">Tu mensaje ha sido enviado correctamente</p>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-success" data-dismiss="modal" onclick="limpiarcampos()">Confirmar</button>
+       </div>
+     </div>
+
+   </div>
+ </div>
+  <!--/#footer-->
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="js/jquery.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.prettyPhoto.js"></script>
+  <script src="js/jquery.isotope.min.js"></script>
+  <script src="js/wow.min.js"></script>
+  <script src="js/jquery.easing.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="contactform/contactform.js"></script>
+
+  <!-- <script type="text/javascript">
+    function submitForm() {
+     var frm = document.getElementsByName('enviar_email')[0];
+      frm.submit(); // Submit the form
+    }
+  </script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#resultado_mensaje").click(function(){
+      $("#modalmensaje").modal();
+    });
+  });
+</script>
+<script type="text/javascript">
+  function limpiarcampos(){
+    $("#modalmensaje").click(function() {
+     $("#enviar_email")[0].reset();
+   });
+  }
+</script> -->
+</body>
+
+</html>
